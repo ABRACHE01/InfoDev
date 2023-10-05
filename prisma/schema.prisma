@@ -15,6 +15,9 @@ model Author {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   articles Article[]
+
+  comments Coment[]
+
 }
 model Article {
 
@@ -25,14 +28,26 @@ model Article {
   authorId Int 
   publishDate DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  comments Coment[]
 
 }
 
-model Coments {
+model Coment {
 
   id Int @id @default(autoincrement())
   content String 
   publishDate DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId Int 
+
+  article   Article @relation(fields: [articleId], references: [id])
+  articleId Int 
+
+}
+
+
+generator client {
+  provider = "prisma-client-js"
 }
