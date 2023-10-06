@@ -1,4 +1,6 @@
-
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "mysql"
@@ -6,48 +8,40 @@ datasource db {
 }
 
 model Author {
-
-  id Int @id @default(autoincrement())
-  fullName String 
-  photo String 
-  email String @unique 
-  password String 
+  id        Int       @id @default(autoincrement())
+  fullName  String
+  photo     String
+  email     String    @unique
+  password  String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  articles Article[]
-
-  comments Comment[]
-
+  articles  Article[]
+  comments  Comment[]
 }
+
 model Article {
-
-  id Int @id @default(autoincrement())
-  title String 
-  content String 
-  author   Author @relation(fields: [authorId], references: [id])
-  authorId Int 
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  authorId    Int
   publishDate DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  comments Comment[]
+  updatedAt   DateTime  @updatedAt
+  author      Author    @relation(fields: [authorId], references: [id])
+  comments    Comment[]
 
+  @@index([authorId], map: "Article_authorId_fkey")
 }
 
 model Comment {
+  id          Int      @id @default(autoincrement())
+  content     String
+  publishDate DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    Int
+  articleId   Int
+  article     Article  @relation(fields: [articleId], references: [id])
+  author      Author   @relation(fields: [authorId], references: [id])
 
-  id Int @id @default(autoincrement())
-  content String 
-  publishDate DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-
-  author   Author @relation(fields: [authorId], references: [id])
-  authorId Int 
-
-  article   Article @relation(fields: [articleId], references: [id])
-  articleId Int 
-
-}
-
-
-generator client {
-  provider = "prisma-client-js"
+  @@index([articleId], map: "Comment_articleId_fkey")
+  @@index([authorId], map: "Comment_authorId_fkey")
 }
