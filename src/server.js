@@ -1,16 +1,14 @@
-const express = require('express');
+import express from 'express';
+import commentController from '../src/controllers/commentController.js';
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 app.use(express.json());
 
-// Define your routes here (controllers)
-// For example:
-const commentController = require('../src/controllers/commentController');
-// app.use('/comments', commentController);
+// Define your routes here
+app.post('/create-comment', commentController.createComment);
 
-// Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-  });
+});

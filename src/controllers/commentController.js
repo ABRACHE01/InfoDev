@@ -1,4 +1,4 @@
-const Comment = require('../models/Comment');
+import Comment from '../models/Comment.js';
 
 const commentController = {
   createComment: async (req, res) => {
@@ -13,4 +13,4 @@ const commentController = {
     },
 };
 
-module.exports = commentController;
+export default commentController;
