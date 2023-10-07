@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article List</title>
+</head>
+<body>
+    <h1>Article List</h1>
+    <ul>
+        <% articles.forEach((article) => { %>
+            <li>
+                <h2><%= article.title %></h2>
+                <p><%= article.content %></p>
+                <p><%= article.publishDate %></p>
+                <p><%= article.author.fullName %></p>
+
+                <!-- Add a delete button for each article -->
+                <form method="POST" action="/articles/<%= article.id %>" style="display: inline;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+
+                <!-- Add a link to view the article details -->
+                <a href="/articles/<%= article.id %>">View Details</a>
+            </li>
+            <hr />
+        <% }) %>
+    </ul>
+</body>
+</html>
