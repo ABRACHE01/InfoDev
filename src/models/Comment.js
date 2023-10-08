@@ -6,7 +6,11 @@ const Comment = {
         return prisma.comment.create({
             data,
         })
-    }
+    },
+
+    findMany: async () => {
+      return prisma.comment.findMany();
+    },
 }
 
 export default Comment;
