@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Define your routes here
+// routes
 app.post('/create-comment', commentController.createComment);
 
 app.listen(port, () => {
