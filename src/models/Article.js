@@ -2,7 +2,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
-
 export default class Article {
 
 
@@ -11,7 +10,10 @@ export default class Article {
         return await prisma.article.findMany({
           include : {
             author : true,
-          }
+          },
+          orderBy: {
+            publishDate: 'desc', 
+          },
         });
       }catch(error){
         throw error;
