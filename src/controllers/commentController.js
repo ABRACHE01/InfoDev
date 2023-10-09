@@ -52,15 +52,8 @@ class CommentController {
     const commentIdAsInt = parseInt(commentId, 10);
     const {content} = req.body;
 
-    console.log('Received request:', req.method, req.url);
-    console.log('Params:', req.params);
-    console.log('Body:', req.body);
-
-    if (isNaN(commentIdAsInt)) {
-      return res.status(400).json({ error: 'Invalid commentId' });
-    }
-    if (!content) {
-      return res.status(400).json({ error: 'missing content' });
+    if(isNaN(commentIdAsInt) || !content) {
+      return res.status(400).json({ error: 'Invalid commentId or missing content' });
     }
     
     try {
