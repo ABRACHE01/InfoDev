@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 export const seeders = {
     authors : {
         model: "author",
@@ -6,49 +8,49 @@ export const seeders = {
                 fullName: "John Doe",
                 photo: "https://example.com/johndoe.jpg",
                 email: "john.doe@example.com",
-                password: "securepassword1"
+                password: await bcrypt.hash("securepassword1", 10)
             },
             {
                 fullName: "Jane Smith",
                 photo: "https://example.com/janesmith.jpg",
                 email: "jane.smith@example.com",
-                password: "strongpassword2"
+                password: await bcrypt.hash("strongpassword2", 10)
             },
             {
                 fullName: "Alice Johnson",
                 photo: "https://example.com/alicejohnson.jpg",
                 email: "alice.johnson@example.com",
-                password: "password123"
+                password: await bcrypt.hash("password123", 10)
             },
             {
                 fullName: "Bob Johnson",
                 photo: "https://example.com/bobjohnson.jpg",
                 email: "bob.johnson@example.com",
-                password: "mypassword456"
+                password: await bcrypt.hash("mypassword456", 10)
             },
             {
                 fullName: "Emily Davis",
                 photo: "https://example.com/emilydavis.jpg",
                 email: "emily.davis@example.com",
-                password: "securepass789"
+                password: await bcrypt.hash("securepass789", 10)
             },
             {
                 fullName: "Michael Brown",
                 photo: "https://example.com/michaelbrown.jpg",
                 email: "michael.brown@example.com",
-                password: "p@ssw0rd!"
+                password: await bcrypt.hash("p@ssw0rd!", 10)
             },
             {
                 fullName: "Sophia Lee",
                 photo: "https://example.com/sophialeee.jpg",
                 email: "sophia.lee@example.com",
-                password: "mysecret321"
+                password: await bcrypt.hash("mysecret321", 10)
             },
             {
                 fullName: "David Wilson",
                 photo: "https://example.com/davidwilson.jpg",
                 email: "david.wilson@example.com",
-                password: "strongPass123"
+                password: await bcrypt.hash("strongPass123", 10)
             }
         ]
     },
