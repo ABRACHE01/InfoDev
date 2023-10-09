@@ -11,4 +11,12 @@ router.post("/register", async(req, res) => {
     }
 });
 
+router.post("/login", async(req, res) => {
+    try{
+        await AuthController.login(req, res)
+    }catch(error){
+        res.status(500).json(error)
+    }
+})
+
 export default router;

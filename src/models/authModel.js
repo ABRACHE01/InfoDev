@@ -24,7 +24,17 @@ export class AuthModel{
         return author;    
     }
 
-    static async login(email, password){
-        
+    static async login(email){
+        const author = await prisma.author.findUnique({
+            where : {
+                email : email,
+            },
+            select : {
+                email : true,
+                password : true,
+            },
+        })
+
+        return author;
     }
 }
