@@ -19,6 +19,19 @@ const Comment = {
         },
       });
     },
+
+    update: async (commentId, data) => {
+      try {
+        return prisma.comment.update({
+          where: {
+            id: commentId,
+          },
+          data,
+        });
+      } catch (error) {
+        throw new Error('Error updating comment');
+      }
+    }
 }
 
 export default Comment;

@@ -46,6 +46,35 @@ class CommentController {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
+  async updateComent(req, res) {
+    const {commentId} = req.params;
+    const commentIdAsInt = parseInt(commentId, 10);
+    const {content} = req.body;
+
+    console.log('Received request:', req.method, req.url);
+    console.log('Params:', req.params);
+    console.log('Body:', req.body);
+
+    if (isNaN(commentIdAsInt)) {
+      return res.status(400).json({ error: 'Invalid commentId' });
+    }
+    if (!content) {
+      return res.status(400).json({ error: 'missing content' });
+    }
+    
+    try {
+      const updatedComment = await Comment.update(commentIdAsInt, {content});
+      if (updatedComment) {
+        res.json({ message: 'Comment updated successfully' });
+      } else {
+        res.status(404).json({ error: 'Comment not found' });
+      }
+    } catch (error) {
+      console.error('Error updating comment:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 }
 
 export default new CommentController();
