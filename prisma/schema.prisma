@@ -23,6 +23,7 @@ model Article {
 
   id Int @id @default(autoincrement())
   title String 
+  photo String?
   content String 
   author   Author @relation(fields: [authorId], references: [id] ,  onDelete: Cascade)
   authorId Int 
@@ -37,7 +38,7 @@ model Article {
 
 model Comment {
   id          Int     @id @default(autoincrement())
-  content     String
+  content     String 
   publishDate DateTime @default(now())
   updatedAt   DateTime @updatedAt
   author      Author  @relation(fields: [authorId], references: [id],  onDelete: Cascade)
