@@ -9,6 +9,8 @@ app.use(express.json());
 // routes
 app.post('/create-comment', CommentController.createComment);
 app.get('/get-comments', CommentController.getComments);
+app.delete('/delete-comment/:commentId', CommentController.deleteComment); 
+
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

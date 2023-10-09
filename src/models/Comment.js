@@ -11,6 +11,14 @@ const Comment = {
     findMany: async () => {
       return prisma.comment.findMany();
     },
+
+    delete: async (commentId) => {
+      return prisma.comment.delete({
+        where: {
+          id: commentId,
+        },
+      });
+    },
 }
 
 export default Comment;
