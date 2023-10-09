@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Add Article</h1>
-    <form method="POST" action="/articles">
+    <form method="POST" action="/articles" enctype="multipart/form-data">
 
         <input type="hidden" id="authorId" name="authorId" value="1"><br>
 
@@ -17,6 +17,9 @@
         <label for="content">Content:</label>
         <textarea id="content" name="content" required></textarea><br>
         
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*"><br> <!-- Input for uploading a photo -->
+
         <button type="submit">Submit</button>
     </form>
 </body>
