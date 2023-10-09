@@ -36,19 +36,17 @@ import Article from  '../models/Article.js' ;
 
       }
 
-      async submitAdd(req, res){
-
-        const data = req.body; 
+      async submitAdd(req, res) {
+        const data = req.body;
         const authorId = parseInt(req.body.authorId, 10);
-
+      
+        const photo = req.file ? req.file.filename : null;
+      
         const articleModel = new Article();
-
+      
         try {
-
-          const newArticle = await articleModel.addArticle({ ...data , authorId  });
-          res.redirect('/articles' );
-          // res.render('article/success', { message: 'Article created successfully' });
-
+          const newArticle = await articleModel.addArticle({ ...data, authorId, photo });
+          res.redirect('/articles');
         } catch (error) {
           throw error;
         }

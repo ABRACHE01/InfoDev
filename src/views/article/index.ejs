@@ -11,6 +11,7 @@
     <ul>
         <% articles.forEach((article) => { %>
             <li>
+                <img src="../uploads/<%= article.photo %>" width="100px" height="100px" alt="">
                 <h2><%= article.title %></h2>
                 <p><%= article.content %></p>
                 <p><%= article.publishDate %></p>
