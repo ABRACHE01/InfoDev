@@ -11,8 +11,11 @@ router.get('/articles/:id' , articleController.show);
 router.get('/article/add', (req, res) => {
     res.render('article/addArticle');
   });
-router.post('/articles', articleController.submitAdd);
 
-router.delete('/articles/:id', articleController.deleteArticle);
+router.get('/article/edite/:id', articleController.showBeforeUpdate);
+router.put('/article/edite/:id', articleController.updateArticle)
+
+router.post('/articles', articleController.submitAdd);
+router.delete('/article/:id', articleController.deleteArticle);
 
 export { router};

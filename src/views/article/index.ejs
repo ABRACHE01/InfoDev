@@ -6,6 +6,7 @@
     <title>Article List</title>
 </head>
 <body>
+    <h1><a href="/article/add">add article</a></h1>
     <h1>Article List</h1>
     <ul>
         <% articles.forEach((article) => { %>
@@ -15,14 +16,12 @@
                 <p><%= article.publishDate %></p>
                 <p><%= article.author.fullName %></p>
 
-                <!-- Add a delete button for each article -->
-                <form method="POST" action="/articles/<%= article.id %>" style="display: inline;">
-                    <input type="hidden" name="_method" value="DELETE">
+                <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
                     <button type="submit">Delete</button>
+                    <a href="/articles/<%= article.id %>">show</a>
+                    <a href="/article/edite/<%= article.id %>">edite</a>
                 </form>
 
-                <!-- Add a link to view the article details -->
-                <a href="/articles/<%= article.id %>">View Details</a>
             </li>
             <hr />
         <% }) %>

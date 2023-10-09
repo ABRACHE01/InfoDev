@@ -7,20 +7,28 @@ export default class Article {
 
 
     async getAllArticles(){
+      try{
         return await prisma.article.findMany({
           include : {
             author : true,
           }
         });
+      }catch(error){
+        throw error;
+      }
     }
 
    async getArticleById(id){
+    try{
     return await prisma.article.findUnique({
       where : {id}, 
       include : {
         author : true,
       }
     })
+  }catch(error){
+    throw error;
+  }
    }
 
    async addArticle(data){
@@ -35,7 +43,6 @@ export default class Article {
 
   async deleteArticle(id){
     try {
-
       return await prisma.article.delete({
         where : {id}, 
       });
@@ -43,6 +50,22 @@ export default class Article {
     } catch (error) {
       throw error;
     }  
+  }
+
+
+  async updateArticle(data) {
+    const { articleId, ...rest } = data;
+  
+    try {
+      return await prisma.article.update({
+        where: { id: articleId },
+        data: {
+          ...rest,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
   }
   
 }
