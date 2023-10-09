@@ -12,11 +12,6 @@ app.get('/get-comments', CommentController.getComments);
 app.delete('/delete-comment/:commentId', CommentController.deleteComment); 
 app.put('/comments/:commentId', CommentController.updateComent);
 
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { router } from './routes/rootes.js';
