@@ -1,3 +1,5 @@
+import bcryptjs from "bcryptjs";
+
 export const seeders = {
     authors : {
         model: "author",
@@ -6,49 +8,49 @@ export const seeders = {
                 fullName: "John Doe",
                 photo: "https://example.com/johndoe.jpg",
                 email: "john.doe@example.com",
-                password: "securepassword1"
+                password: await bcryptjs.hash("securepassword1", 10)
             },
             {
                 fullName: "Jane Smith",
                 photo: "https://example.com/janesmith.jpg",
                 email: "jane.smith@example.com",
-                password: "strongpassword2"
+                password: await bcryptjs.hash("strongpassword2", 10)
             },
             {
                 fullName: "Alice Johnson",
                 photo: "https://example.com/alicejohnson.jpg",
                 email: "alice.johnson@example.com",
-                password: "password123"
+                password: await bcryptjs.hash("password123", 10)
             },
             {
                 fullName: "Bob Johnson",
                 photo: "https://example.com/bobjohnson.jpg",
                 email: "bob.johnson@example.com",
-                password: "mypassword456"
+                password: await bcryptjs.hash("mypassword456", 10)
             },
             {
                 fullName: "Emily Davis",
                 photo: "https://example.com/emilydavis.jpg",
                 email: "emily.davis@example.com",
-                password: "securepass789"
+                password: await bcryptjs.hash("securepass789", 10)
             },
             {
                 fullName: "Michael Brown",
                 photo: "https://example.com/michaelbrown.jpg",
                 email: "michael.brown@example.com",
-                password: "p@ssw0rd!"
+                password: await bcryptjs.hash("p@ssw0rd!", 10)
             },
             {
                 fullName: "Sophia Lee",
                 photo: "https://example.com/sophialeee.jpg",
                 email: "sophia.lee@example.com",
-                password: "mysecret321"
+                password: await bcryptjs.hash("mysecret321", 10)
             },
             {
                 fullName: "David Wilson",
                 photo: "https://example.com/davidwilson.jpg",
                 email: "david.wilson@example.com",
-                password: "strongPass123"
+                password: await bcryptjs.hash("strongPass123", 10)
             }
         ]
     },
@@ -58,36 +60,43 @@ export const seeders = {
             {
                 title: "Introduction to JavaScript",
                 content: "JavaScript is a versatile programming language...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 1
             },
             {
                 title: "Getting Started with React",
                 content: "React is a popular JavaScript library for building user interfaces...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 2
             },
             {
                 title: "Node.js Fundamentals",
                 content: "Node.js is a runtime environment that allows you to run JavaScript on the server...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 3
             },
             {
                 title: "Python Programming Basics",
                 content: "Python is a high-level, interpreted programming language...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 4
             },
             {
                 title: "Data Science with Python",
-                content: "Data science involves analyzing and interpreting data using Python...",
+                content: "Data science involves analyzing and interpreting data using Python...",               photo: "https://example.com/johndoe.jpg",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 5
             },
             {
                 title: "Machine Learning Algorithms",
                 content: "Machine learning is a subset of artificial intelligence...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 6
             },
             {
                 title: "Web Development with Ruby on Rails",
                 content: "Ruby on Rails is a web application framework written in Ruby...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 7
             }
         ]
