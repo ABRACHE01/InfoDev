@@ -60,36 +60,43 @@ export const seeders = {
             {
                 title: "Introduction to JavaScript",
                 content: "JavaScript is a versatile programming language...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 1
             },
             {
                 title: "Getting Started with React",
                 content: "React is a popular JavaScript library for building user interfaces...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 2
             },
             {
                 title: "Node.js Fundamentals",
                 content: "Node.js is a runtime environment that allows you to run JavaScript on the server...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 3
             },
             {
                 title: "Python Programming Basics",
                 content: "Python is a high-level, interpreted programming language...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 4
             },
             {
                 title: "Data Science with Python",
-                content: "Data science involves analyzing and interpreting data using Python...",
+                content: "Data science involves analyzing and interpreting data using Python...",               photo: "https://example.com/johndoe.jpg",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 5
             },
             {
                 title: "Machine Learning Algorithms",
                 content: "Machine learning is a subset of artificial intelligence...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 6
             },
             {
                 title: "Web Development with Ruby on Rails",
                 content: "Ruby on Rails is a web application framework written in Ruby...",
+                photo: "https://example.com/johndoe.jpg",
                 authorId: 7
             }
         ]
