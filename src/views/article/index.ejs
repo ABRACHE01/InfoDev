@@ -23,14 +23,15 @@
                     <a href="/article/edite/<%= article.id %>">edite</a>
                 </form>
                 <div  class="comments-body">
-                    <p>Comments</p>
                     <div>
-                        <p>this a comments</p>
-                        <div>
-                            <p>photo</p>
-                            <button>update</button>
-                            <button>delete</button>
-                        </div>
+                        <ul>
+                            <% article.comments.forEach((comment) => { %>
+                              <li>
+                                <p><%= comment.content %></p>
+                                <!-- Display other comment properties as needed -->
+                              </li>
+                            <% }) %>
+                          </ul>
                     </div>
 
                     <form action="/create-comment" method="POST">

@@ -8,8 +8,11 @@ export default class Article {
     async getAllArticles(){
       try{
         return await prisma.article.findMany({
-          include : {
-            author : true,
+          include: {
+            author: true,
+            comments: { // Include comments related to this article
+              
+            },
           },
           orderBy: {
             publishDate: 'desc', 

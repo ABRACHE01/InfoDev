@@ -20,21 +20,17 @@ import Article from  '../models/Article.js' ;
     }
     
     async show(req, res) {
-
-        const articleModel = new Article();
-        const { id } = req.params; 
-
-        try {
-
+      const articleModel = new Article();
+      const { id } = req.params;
+    
+      try {
         const articleId = parseInt(id, 10);
         const article = await articleModel.getArticleById(articleId);
         res.render('article/show', { article });
-
-        }catch(error){
-          throw error;
-        }
-
+      } catch (error) {
+        throw error;
       }
+    }
 
       async submitAdd(req, res) {
         const data = req.body;
