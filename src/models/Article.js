@@ -33,7 +33,7 @@ export default class Article {
   }
    }
 
-  
+
    async addArticle(data) {
     try {
       const newArticle = await prisma.article.create({

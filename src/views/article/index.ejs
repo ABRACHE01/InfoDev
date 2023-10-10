@@ -15,6 +15,7 @@
                 <h2><%= article.title %></h2>
                 <p><%= article.content %></p>
                 <p><%= article.publishDate %></p>
+                <p><%= article.updatedAt  %></p>
                 <p><%= article.author.fullName %></p>
 
                 <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
