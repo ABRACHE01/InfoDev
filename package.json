@@ -1,5 +1,8 @@
 {
   "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss build styles.css -o output.css"
+  },
   "dependencies": {
     "@prisma/client": "^5.4.1",
     "bcryptjs": "^2.4.3",

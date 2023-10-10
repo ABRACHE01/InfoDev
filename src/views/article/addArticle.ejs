@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Article</title>
-</head>
-<body>
-    <h1>Add Article</h1>
+
+
+<%- include ("../layouts/header.ejs") %>
+    <h1 >Add Article</h1>
     <form method="POST" action="/articles" enctype="multipart/form-data">
 
         <input type="hidden" id="authorId" name="authorId" value="1"><br>
@@ -22,5 +17,4 @@
 
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+    <%- include ("../layouts/footer.ejs") %>
