@@ -61,19 +61,22 @@ export default class Article {
 
 
   async updateArticle(data) {
-    const { articleId, ...rest } = data;
-  
+    const { articleId, photo , ...rest } = data;
+
     try {
       return await prisma.article.update({
         where: { id: articleId },
         data: {
           ...rest,
+          photo: photo ,
         },
+        
       });
     } catch (error) {
       throw error;
     }
   }
+ 
   
 }
 
