@@ -2,6 +2,7 @@
 import Article from  '../models/Article.js' ;
 import path from 'path';
 import fs from 'fs/promises';
+import validation from '../requests/requestArticle.js';
 
  class ArticleController {
 
@@ -38,6 +39,17 @@ import fs from 'fs/promises';
       }
 
       async submitAdd(req, res) {
+
+        let check = validation.validateInpute(req)
+
+        if(check.error){
+
+          return res.status(400).render("article/addArticle", {
+            'error': "please fill all the inputs"
+          })
+
+        }
+
         const data = req.body;
         const authorId = parseInt(req.body.authorId, 10);
       
@@ -53,7 +65,6 @@ import fs from 'fs/promises';
         }
       }
       
-  
       async deleteArticle(req, res) {
         const { id } = req.params;
         const articleModel = new Article();
@@ -102,6 +113,16 @@ import fs from 'fs/promises';
       }
 
       async updateArticle(req, res) {
+
+        let check = validation.validateInpute(req)
+
+        if(check.error){
+
+          return res.status(400).render("article/editeArticle", {
+            'error': "please fill all the inputs"
+          })
+
+        }
         const articleModel = new Article();
         const data = req.body;
         const authorId = parseInt(req.body.authorId, 10);
@@ -124,6 +145,14 @@ import fs from 'fs/promises';
         } catch (error) {
             throw error;
         }
+    }
+
+    async dashboard(req , res ){
+      const articleModel = new Article();
+      const articles = await articleModel.getAuthArticles(req)
+      return res.render("article/dashboard",{
+        articles,
+      })
     }
     
 

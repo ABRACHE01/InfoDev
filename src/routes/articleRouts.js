@@ -8,6 +8,7 @@ const articleController = new ArticleController();
 //routes here 
 
 router.get('/articles', articleController.index);
+router.get('/dashboard', articleController.dashboard);
 router.get('/articles/:id', articleController.show);
 router.get('/article/add', (req, res) => {
   res.render('article/addArticle');

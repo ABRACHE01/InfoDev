@@ -5,6 +5,8 @@ const prisma = new PrismaClient()
 export default class Article {
 
 
+
+
     async getAllArticles(){
       try{
         return await prisma.article.findMany({
@@ -33,7 +35,35 @@ export default class Article {
   }
    }
 
+   async getAuthArticles(){
+    
+    try {
 
+      const articles = await prisma.article.findMany({
+
+        select : {
+          id : true , 
+          title : true ,
+          content : true ,
+          photo: true ,
+          publishDate:true ,
+          updatedAt:true ,  
+          author : true,  
+        },
+        where:{
+          // authorId : parseInt(req.cookies.user_id)
+          authorId : 1
+        }
+
+      })
+      return articles ;
+    }catch(error){
+
+      throw error
+
+    }
+    
+  }
    async addArticle(data) {
     try {
       const newArticle = await prisma.article.create({

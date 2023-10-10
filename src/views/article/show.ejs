@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <% if(article){ %> 
 
-<h1><%= article.title  %></h1>
+<% if(article){ %> 
+
+<h1><%= article.title %></h1>
 <img src="../uploads/<%= article.photo %>" width="100px" height="100px" alt="">
 <p>
     <%= article.content %>
@@ -19,12 +12,14 @@
 <p>
     <%= article.author.fullName %>
 </p> 
-<form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
-    <button type="submit">Delete</button>
-</form>
+
+<% if(article.authorId == 1 ){ %>
+    <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
+        <button type="submit">Delete</button>
+        <a href="/article/edite/<%= article.id %>">edite</a>
+    </form>
+<% } %> 
 
 <% }else{ %>
     <h1>article not found</h1>
 <% } %> 
-</body>
-</html>
