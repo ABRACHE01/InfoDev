@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 const Comment = {
     create: async (data) => {
         return prisma.comment.create({
-            data,
+           data ,
         })
     },
 

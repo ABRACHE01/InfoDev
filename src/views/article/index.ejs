@@ -22,7 +22,31 @@
                     <a href="/articles/<%= article.id %>">show</a>
                     <a href="/article/edite/<%= article.id %>">edite</a>
                 </form>
+                <div  class="comments-body">
+                    <p>Comments</p>
+                    <div>
+                        <p>this a comments</p>
+                        <div>
+                            <p>photo</p>
+                            <button>update</button>
+                            <button>delete</button>
+                        </div>
+                    </div>
 
+                    <form action="/create-comment" method="POST">
+                        <div>
+                          <label for="content">Content:</label>
+                          <textarea id="content" name="content" required></textarea>
+                        </div>
+                        <div>
+                          <input type="hidden" id="authorId" name="authorId" value="1" required>
+                        </div>
+                        <div>
+                          <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>" required>
+                        </div>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
             </li>
             <hr />
         <% }) %>

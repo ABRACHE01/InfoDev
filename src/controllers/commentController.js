@@ -5,12 +5,21 @@ class CommentController {
 
   async createComment(req, res) {
     const { content, publishDate, authorId, articleId } = req.body;
+
+    const authorIdAsInt = parseInt(authorId, 10);
+    const articleIdAsInt = parseInt(articleId, 10);
+
     if (!content || !authorId || !articleId) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
-      const comment = await Comment.create({ content, publishDate, authorId, articleId });
+      const comment = await Comment.create({
+        content,
+        publishDate,
+        author: { connect: { id: authorIdAsInt } },
+        article: { connect: { id: articleIdAsInt } },
+      });
       res.json(comment);
     } catch (error) {
       console.error('Error creating comment:', error);
