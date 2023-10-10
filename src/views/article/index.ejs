@@ -29,6 +29,13 @@
                               <li>
                                 <p><%= comment.content %></p>
                                 <!-- Display other comment properties as needed -->
+                                <form
+                                    method="POST"
+                                    action="/delete-comment/<%= comment.id %>?_method=DELETE"
+                                    onsubmit="console.log('Form submitted');"
+                                >
+                                    <button type="submit">Delete Comment</button>
+                                </form>
                               </li>
                             <% }) %>
                           </ul>

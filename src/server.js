@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 
+app.use(methodOverride('_method'));
+
 // routes
 app.post('/create-comment', CommentController.createComment);
 app.get('/get-comments', CommentController.getComments);

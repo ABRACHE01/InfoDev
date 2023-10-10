@@ -12,12 +12,15 @@ const Comment = {
       return prisma.comment.findMany();
     },
 
-    delete: async (commentId) => {
-      return prisma.comment.delete({
-        where: {
-          id: commentId,
-        },
-      });
+    async deleteComment(id){
+      try {
+        return await prisma.comment.delete({
+          where : {id}, 
+        });
+         
+      } catch (error) {
+        throw error;
+      }  
     },
 
     update: async (commentId, data) => {
