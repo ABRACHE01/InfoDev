@@ -80,7 +80,30 @@
                         </ul>
                     </div>
                 </footer>
-                <p class="text-gray-500 dark:text-gray-400">Thanks for sharing this. I do came from the Backend development and explored some of the tools to design my Side Projects.</p>
+                <!-- <p class="text-gray-500 dark:text-gray-400">Thanks for sharing this. I do came from the Backend development and explored some of the tools to design my Side Projects.</p> -->
+                <% article.comments.forEach((comment) => { %>
+                    <!-- <li> -->
+                      <p id="comment-<%= comment.id %>" class="bg-pink-200 rounded p-3 my-2"><%= comment.content %></p>
+                      <!-- <form id="update-form-<%= comment.id %>" method="POST" action="/update-comment/<%= comment.id %>?_method=PUT" style="display: none;">
+                          <input type="text" name="content" value="<%= comment.content %>">
+                          <button type="submit" class="bg-red-200">Save</button>
+                      </form> -->
+
+                      <!-- Display other comment properties as needed -->
+                      <div class="flex space-x-4 mb-6">
+                          <!-- <form
+                              method="POST"
+                              action="/delete-comment/<%= comment.id %>?_method=DELETE"
+                              onsubmit="console.log('Form submitted');"
+                          >
+                              <button type="submit" class="bg-red-700 text-white p-2 rounded">Delete</button>
+                          </form>
+                          <button onclick="displayFormUpdate('<%= comment.id %>')" class="bg-blue-700 text-white p-2 rounded">Edit</button>
+                      </div>
+
+                      
+                    </li> -->
+                    <% }) %>
             
             </article> 
             </div>

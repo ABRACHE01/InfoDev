@@ -31,6 +31,9 @@ export default class Article {
       where : {id}, 
       include : {
         author : true,
+        comments: { // Include comments related to this article
+              
+        },
       }
     })
   }catch(error){
