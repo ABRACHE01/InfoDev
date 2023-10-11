@@ -5,6 +5,8 @@ const prisma = new PrismaClient()
 export default class Article {
 
 
+
+
     async getAllArticles(){
       try{
         return await prisma.article.findMany({
@@ -33,14 +35,47 @@ export default class Article {
   }
    }
 
-   async addArticle(data){
+   async getAuthArticles(){
+    
     try {
-      const newArticle = await prisma.article.create({ data });
+
+      const articles = await prisma.article.findMany({
+
+        select : {
+          id : true , 
+          title : true ,
+          content : true ,
+          photo: true ,
+          publishDate:true ,
+          updatedAt:true ,  
+          author : true,  
+        },
+        where:{
+          // authorId : parseInt(req.cookies.user_id)
+          authorId : 1
+        }
+
+      })
+      return articles ;
+    }catch(error){
+
+      throw error
+
+    }
+    
+  }
+   async addArticle(data) {
+    try {
+      const newArticle = await prisma.article.create({
+        data: {
+          ...data,
+          photo: data.photo || null, 
+        },
+      });
       return newArticle;
     } catch (error) {
       throw error;
-    }  
-
+    }
   }
 
   async deleteArticle(id){
@@ -56,19 +91,22 @@ export default class Article {
 
 
   async updateArticle(data) {
-    const { articleId, ...rest } = data;
-  
+    const { articleId, photo , ...rest } = data;
+
     try {
       return await prisma.article.update({
         where: { id: articleId },
         data: {
           ...rest,
+          photo: photo ,
         },
+        
       });
     } catch (error) {
       throw error;
     }
   }
+ 
   
 }
 
