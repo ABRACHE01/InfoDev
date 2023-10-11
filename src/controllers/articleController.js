@@ -1,6 +1,8 @@
 
 import Article from  '../models/Article.js' ;
-
+import path from 'path';
+import fs from 'fs/promises';
+import validation from '../requests/requestArticle.js';
 
  class ArticleController {
 
@@ -33,6 +35,17 @@ import Article from  '../models/Article.js' ;
     }
 
       async submitAdd(req, res) {
+
+        let check = validation.validateInpute(req)
+
+        if(check.error){
+
+          return res.status(400).render("article/addArticle", {
+            'error': "please fill all the inputs"
+          })
+
+        }
+
         const data = req.body;
         const authorId = parseInt(req.body.authorId, 10);
       
@@ -49,15 +62,30 @@ import Article from  '../models/Article.js' ;
       }
       
       async deleteArticle(req, res) {
-        const { id } = req.params; 
-        const Id = parseInt(id, 10);
+        const { id } = req.params;
         const articleModel = new Article();
+    
         try {
-
-          console.log('been here ')
-          await articleModel.deleteArticle(Id);
+          // Get the root directory of your project
+          const rootDir = process.cwd();
+    
+          // Retrieve the article by ID to get the associated photo filename
+          const article = await articleModel.getArticleById(parseInt(id, 10));
+    
+          if (!article) {
+            return res.status(404).json({ message: 'Article not found' });
+          }
+    
+          // Delete the associated image file using the filename from the article
+          if (article.photo) {
+            const imagePath = path.join(rootDir, 'public/uploads', article.photo);
+            await fs.unlink(imagePath);
+          }
+    
+          // Delete the article record from the database
+          await articleModel.deleteArticle(parseInt(id, 10));
+    
           res.redirect('/articles');
-
         } catch (error) {
           throw error;
         }
@@ -80,22 +108,49 @@ import Article from  '../models/Article.js' ;
 
       }
 
-      async updateArticle(req , res ){
+      async updateArticle(req, res) {
+
+        let check = validation.validateInpute(req)
+
+        if(check.error){
+
+          return res.status(400).render("article/editeArticle", {
+            'error': "please fill all the inputs"
+          })
+
+        }
+        const articleModel = new Article();
         const data = req.body;
         const authorId = parseInt(req.body.authorId, 10);
-        const articleModel = new Article();
-        const { id } = req.params; 
+        const { id } = req.params;
         const articleId = parseInt(id, 10);
-        
+    
         try {
-
-        await articleModel.updateArticle({...data , authorId , articleId } )
-        res.redirect('/articles' );
-
-        }catch(error){
-          throw error ;
+            const photo = req.file ? req.file.filename : null;
+    
+    
+            const updatedData = {
+                ...data,
+                authorId,
+                articleId,
+                photo: photo , 
+            };
+    
+            await articleModel.updateArticle(updatedData);
+            res.redirect('/articles');
+        } catch (error) {
+            throw error;
         }
-      }
+    }
+
+    async dashboard(req , res ){
+      const articleModel = new Article();
+      const articles = await articleModel.getAuthArticles(req)
+      return res.render("article/dashboard",{
+        articles,
+      })
+    }
+    
 
 }
 

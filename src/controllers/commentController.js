@@ -20,7 +20,7 @@ class CommentController {
         author: { connect: { id: authorIdAsInt } },
         article: { connect: { id: articleIdAsInt } },
       });
-      res.redirect('/articles');
+      res.redirect(`/articles/${articleId}`);
     } catch (error) {
       console.error('Error creating comment:', error);
       res.status(500).json({ error: 'Internal Server Error' });
