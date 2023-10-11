@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    
+<!-- 
+        <div class=" m-5 bg-white max-w-sm   border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+            <div class=" mt-5flex flex-col items-center pb-10">
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../public/images/temp_image_20230717_110755_385a1d63-192c-4a58-89a9-4971b68ae677.jpg" alt="Bonnie image"/>
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%= specificUser.fullName %> ss</h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400"><%= specificUser.email %></span>
+                <div class="flex mt-4 space-x-3 md:mt-6">
+                    <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</a>
+                    <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Remove</a>
+                </div>
+            </div>
+        </div> -->
+
+        <div class=" p-5 m-5 flex justify-center items-center w-screen">
+            <div class="bg-white max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="mt-5 flex flex-col items-center pb-10">
+                    <div class="w-24 h-24 mb-3 rounded-full shadow-lg">
+                        <img class="w-full h-full rounded-full" src="../uploads/<%= specificUser.photo %>" alt="image"/>
+                    </div>
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%= specificUser.fullName %></h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400"><%= specificUser.email %></span>
+                    <div class=" p-5 flex mt-4 space-x-3 md:mt-6">
+                        <a href="/editUser/<%= specificUser.id %>" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Edit</a>
+                        <form action="/deleteUser/<%= specificUser.id %>" method="POST">
+                            <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--     
+        <form action="/profile" method="post" enctype="multipart/form-data">
+            <input type="file" name="avatar" />
+            <button type="submit">upload</button>
+          </form> -->
+
+    <h1>Latest Articles</h1>
+    <hr>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+</body>
+</html>
