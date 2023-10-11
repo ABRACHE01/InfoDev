@@ -27,7 +27,12 @@
                         <ul>
                             <% article.comments.forEach((comment) => { %>
                               <li>
-                                <p><%= comment.content %></p>
+                                <p id="comment-<%= comment.id %>"><%= comment.content %></p>
+                                <form id="update-form-<%= comment.id %>" method="POST" action="/update-comment/<%= comment.id %>?_method=PUT" style="display: none;">
+                                    <input type="text" name="content" value="<%= comment.content %>">
+                                    <button type="submit">Save</button>
+                                </form>
+
                                 <!-- Display other comment properties as needed -->
                                 <form
                                     method="POST"
@@ -36,28 +41,39 @@
                                 >
                                     <button type="submit">Delete Comment</button>
                                 </form>
+                                <button onclick="displayFormUpdate('<%= comment.id %>')">edit</button>
+
+                                
                               </li>
+                              <form action="/create-comment" method="POST">
+                                  <div>
+                                  <label for="content">Content:</label>
+                                  <textarea id="content" name="content" required></textarea>
+                                  </div>
+                                  <div>
+                                  <input type="hidden" id="authorId" name="authorId" value="1" required>
+                                  </div>
+                                  <div>
+                                  <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>" required>
+                                  </div>
+                                  <button type="submit">Submit</button>
+                              </form>
                             <% }) %>
                           </ul>
                     </div>
-
-                    <form action="/create-comment" method="POST">
-                        <div>
-                          <label for="content">Content:</label>
-                          <textarea id="content" name="content" required></textarea>
-                        </div>
-                        <div>
-                          <input type="hidden" id="authorId" name="authorId" value="1" required>
-                        </div>
-                        <div>
-                          <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>" required>
-                        </div>
-                        <button type="submit">Submit</button>
-                    </form>
                 </div>
             </li>
             <hr />
         <% }) %>
     </ul>
+
+    <script>
+        const displayFormUpdate = (commentId) => {
+            const updateForm = document.getElementById(`update-form-${commentId}`);
+            updateForm.style.display = "block";
+            const commentContent = document.getElementById(`comment-${commentId}`);
+            commentContent.style.display = "none";
+        }
+     </script>
 </body>
 </html>

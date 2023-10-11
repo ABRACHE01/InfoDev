@@ -17,7 +17,7 @@ app.use(methodOverride('_method'));
 app.post('/create-comment', CommentController.createComment);
 app.get('/get-comments', CommentController.getComments);
 app.delete('/delete-comment/:commentId', CommentController.deleteComment); 
-app.put('/comments/:commentId', CommentController.updateComent);
+app.put('/update-comment/:commentId', CommentController.updateComent);
 
 import path from 'path';
 import { fileURLToPath } from 'url';
