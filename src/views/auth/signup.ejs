@@ -1,0 +1,13 @@
+<main style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 80vh;">
+    <h1>Signup</h1>
+    <% if(error) { %>
+        <h3><%= error %></h3>
+    <% } %>
+    <form method="POST" action="/register" enctype="multipart/form-data" style="display: flex; flex-direction: column; width: 100%; align-items: center; justify-content: center; row-gap: 12px;">
+        <input type="file" name="photo">
+        <input type="text" name="fullName">
+        <input type="text" name="email">
+        <input type="password" name="password">
+        <button type="submit">Signup</button>
+    </form>
+</main> 

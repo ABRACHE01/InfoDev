@@ -30,9 +30,21 @@ export class AuthModel{
                 email : email,
             },
             select : {
+                id : true,
                 email : true,
                 password : true,
             },
+        })
+
+        return author;
+    }
+
+    static async getAuthor(id){
+        
+        const author = prisma.author.findUnique({
+            where : {
+                id : parseInt(id)
+            }
         })
 
         return author;
