@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 80vh;">
+        <h1>Login</h1>
+        <form method="POST" action="" style="display: flex; flex-direction: column; width: 100%; align-items: center; justify-content: center; row-gap: 12px;">
+            <input type="text" name="email" value="">
+            <input type="password" name="password" value="">
+            <button id="loginBtn">Login</button>
+        </form>
+    </main> 
+</body>
+<script>
+    const email = document.querySelector('input[name="email"]');
+    const password = document.querySelector('input[name="password"]');
+    const submitBtn = document.getElementById('loginBtn');
+
+
+    submitBtn.addEventListener('click', () => {
+        const data = {
+            email : email.value,
+            password : password.value
+        };
+
+        fetch('login', {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json',
+            },
+            body : JSON.stringify(data) 
+        }).then(response => {
+            if(!response.ok){
+                throw new Error("Network response was not ok");
+            }
+            console.log(response.json());
+        })
+    })
+</script>
+</html>

@@ -1,6 +1,6 @@
 import express from 'express';
 import { ArticleController } from '../controllers/articleController.js';
-const multer = require('multer'); // Import multer here
+import multer from "multer"
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
