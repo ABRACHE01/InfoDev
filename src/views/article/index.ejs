@@ -10,16 +10,16 @@
                 <% articles.forEach((article) => { %>
                 <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="">
-                        <img class="rounded-t-lg" src="../uploads/<%= article.photo %>" alt="" />
+                        <img class="rounded-t-lg" src="../uploads/<%= article.photo %>" />
                     </a>
                     <div class="flex justify-between items-center m-5 text-gray-500">
-                        <span class="text-sm">14 days ago</span>
+                        <span class="text-sm"><%= article.publishDate %></span>
                     </div>
                     <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> <%= article.title %></h2>
                     <p class="mb-5 font-light text-gray-500 dark:text-gray-400"><%= article.content %></p>
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-4">
-                            <img class="w-7 h-7 rounded-full" src="../uploads/<%= article.photo %>" alt="Jese Leos avatar" />
+                            <img class="w-7 h-7 rounded-full" src="../uploads/<%= article.author.photo %>" alt="<%= article.author.fullName %>" />
                             <span class="font-medium dark:text-white">
                                 <%= article.author.fullName %>
                             </span>
