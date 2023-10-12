@@ -1,25 +1,86 @@
 
-<h1><a href="/article/add">add article</a></h1>
-<h1><a href="/articles">all articles</a></h1>
 
-<h1>Article List</h1>
-<ul>
-    <% articles.forEach((article) => { %>
-        <li>
-            <img src="../uploads/<%= article.photo %>" width="100px" height="100px" alt="">
-            <h2><%= article.title %></h2>
-            <p><%= article.content %></p>
-            <p><%= article.publishDate %></p>
-            <p><%= article.updatedAt  %></p>
-            <p><%= article.author.fullName %></p>
 
-            <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
-                <button type="submit">Delete</button>
-                <a href="/articles/<%= article.id %>">show</a>
-                <a href="/article/edite/<%= article.id %>">edite</a>
-            </form>
 
-        </li>
-        <hr />
-    <% }) %>
-</ul>
+
+
+
+
+
+<div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <div class="mx-auto max-w-screen-sm  pt-10 text-center lg:mb-16 mb-8">
+        <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Author Dashboard</h2>
+        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Welcome to the infodev blog we are happy to be here with use you are in the right place .</p>
+    </div> 
+    <div class="flex justify-center  ">
+ 
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                    <button  class="inline-flex bg-blue-800 items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                       <a href="article/add">add article</a> 
+                    </button>
+                </caption>
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            image 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Article title 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            article contenet 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            authore 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            date of creation 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          
+                        </th>
+                    </tr>
+                  
+                </thead>
+                <tbody>
+                    <% articles.forEach((article) => { %>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <img src="../uploads/<%= article.photo %>" class="rounded-lg" width="50px" height="50px" alt="">  
+                        </th>
+                        <td class="px-6 py-4">
+                            <%= article.title %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= article.content %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= article.author.fullName %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <%= article.publishDate %>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="/article/edite/<%= article.id %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
+                                <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        
+
+    </div>
+    </div>
+   
