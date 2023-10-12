@@ -1,26 +1,8 @@
 import Autor from  '../models/User.js' ;
 import path from 'path';
 import fs from 'fs/promises';
-// import validation from '../requests/requestUser.js';
 
- export default class UserController {
-
-
-    async index(req , res ){
-
-        const userModel = new Autor();
-
-        try {
-
-        const users = await userModel.getAllUsers();
-        // res.render('user/index' , {users}) 
-        res.json({users}) 
-
-
-        }catch(error){
-          throw error;
-        }
-    }
+  class UserController {
 
 
 
@@ -33,7 +15,7 @@ import fs from 'fs/promises';
 
         const userId = parseInt(id, 10);
         const specificUser = await userModel.getUserById(userId);
-        res.render('user/index', { specificUser});
+        res.render('user/index', { req , specificUser});
 
         }catch(error){
           throw error;
@@ -66,8 +48,8 @@ import fs from 'fs/promises';
     
           // Delete the article record from the database
           await userModel.deleteUser(parseInt(id, 10));
-          res.send('User Deleetd Successflly');
-          // res.redirect('login');
+          // res.send('User Deleetd Successflly');
+          res.redirect('/logout');
         } catch (error) {
           throw error;
         }
@@ -84,54 +66,13 @@ import fs from 'fs/promises';
 
         const userId = parseInt(id, 10);
         const specificUser = await userModel.getUserById(userId);
-        res.render('user/editUser', { specificUser });
+        res.render('user/editUser', {req, specificUser });
 
         }catch(error){
           throw error;
         }
 
       }
-
-
-
-
-    //   async updateUser(req, res) {
-
-    //     // let check = validation.validateInpute(req)
-
-    //     // if(check.error){
-
-    //     //   return res.status(400).render("article/editeUser", {
-    //     //     'error': "please fill all the inputs"
-    //     //   })
-
-    //     // }
-    //     const userModel = new Autor();
-    //     const data = req.body;
-    //     // const authorId = parseInt(req.body.authorId, 10);
-    //     const { id } = req.params;
-    //     const userId = parseInt(id, 10);
-    
-    //     try {
-    //         const photo = req.file ? req.file.filename : null;
-    
-    
-    //         const updatedData = {
-    //              ...data,
-    //             fullName: newName,
-    //            email: newEmail,
-    //           password: newPassword,
-    //           photo: photo
-    //         };
-    
-    //         await userModel.updateUser(updatedData);
-    //         res.redirect('/user/index');
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
-
-
 
       async updateUser(req, res) {
       const userModel = new Autor();
@@ -141,11 +82,6 @@ import fs from 'fs/promises';
       try {
         const photo = req.file && req.file.filename ;
  
-        // // Define and assign values to newName, newEmail, and newPassword based on data from the request.
-        // const newName = data.name; // Replace 'name' with the actual field name in your form.    
-        // const newEmail = data.email; // Replace 'email' with the actual field name in your form.
-        // const newPassword = data.password; // Replace 'password' with the actual field name in your form.
-    
         const updatedData = {
           ...data,
           userId,
@@ -158,16 +94,8 @@ import fs from 'fs/promises';
         throw error;
       }
     }
-    
-
-
-
-    
-
-
-
-    
-
 
 
  }
+
+ export {UserController}

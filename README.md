@@ -18,3 +18,9 @@ En tant que spécialiste Full Stack en JavaScript, nous vous invitons à intégr
 * package.json and package-lock.json: Manage your project's dependencies.  
 * .gitignore: Ignore files and directories for version control.  
 
+## Run program :
+
+* npm install
+* npx prisma migrate dev
+* npx prisma db seed
+* npm run dev
