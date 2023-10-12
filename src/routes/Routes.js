@@ -4,6 +4,7 @@ import upload from "../help.js"
 import { authMiddlewares } from '../middleware/authentification.js';
 import { AuthController } from '../controllers/authController.js';
 import    { UserController }   from '../controllers/userController.js';
+import CommentController from '../controllers/CommentController.js';
 
 
 
@@ -88,10 +89,12 @@ router.get("/register",authMiddlewares.preventBackToLoginOrSignup, (req, res) =>
   })
 })
 
-// router.get("/home", authMiddlewares.checkIfLoggedIn, (req, res)=>{
-//   res.render('home')
-// })
 
+// routes
+router.post('/create-comment', CommentController.createComment);
+router.get('/get-comments', CommentController.getComments);
+router.delete('/delete-comment/:commentId', CommentController.deleteComment); 
+router.put('/update-comment/:commentId', CommentController.updateComent);
 
 
 
