@@ -69,23 +69,19 @@ import validation from '../requests/requestArticle.js';
         const articleModel = new Article();
     
         try {
-          // Get the root directory of your project
           const rootDir = process.cwd();
     
-          // Retrieve the article by ID to get the associated photo filename
           const article = await articleModel.getArticleById(parseInt(id, 10));
     
           if (!article) {
             return res.status(404).json({ message: 'Article not found' });
           }
     
-          // Delete the associated image file using the filename from the article
           if (article.photo) {
             const imagePath = path.join(rootDir, 'public/uploads', article.photo);
             await fs.unlink(imagePath);
           }
     
-          // Delete the article record from the database
           await articleModel.deleteArticle(parseInt(id, 10));
     
           res.redirect('/dashboard');
@@ -129,7 +125,7 @@ import validation from '../requests/requestArticle.js';
         const articleId = parseInt(id, 10);
     
         try {
-            const photo = req.file ? req.file.filename : null;
+            const photo = req.file && req.file.filename ;
     
     
             const updatedData = {
