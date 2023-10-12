@@ -9,7 +9,8 @@ export class AuthController{
         
         if(validate.error){
             return res.status(400).render("auth/register", {
-                'error': "double check on your inputs!"
+                'error': "double check on your inputs!",
+                req
             })
         }
 
@@ -46,7 +47,7 @@ export class AuthController{
         if(author){
             if(await bcryptjs.compare(password, author.password)){
                 res.cookie('user_id', author.id);
-                res.redirect('/home'); // change it to /dashboard
+                res.redirect('/dashboard');
             }else{
                 res.status(400).render("auth/login", {
                     'error': "Incorrect password",
@@ -64,10 +65,7 @@ export class AuthController{
     static async logout(req, res){
         if(req.cookies.user_id){
             res.clearCookie('user_id')
-            res.render('auth/login', {
-                'error' : '',
-                req
-            });
+            res.redirect('/login');
         }
     }
 }

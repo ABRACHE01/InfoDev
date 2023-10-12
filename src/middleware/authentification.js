@@ -18,7 +18,7 @@ export class authMiddlewares{
         const userId = req.cookies.user_id;
       
         if (userId) {
-          return res.redirect('/home');
+          return res.redirect('/dashboard');
         }
     
         next();

@@ -13,7 +13,7 @@ import validation from '../requests/requestArticle.js';
         try {
 
         const articles = await articleModel.getAllArticles();
-        res.render('article/index' , {articles}) 
+        res.render('article/index' , {articles, req}) 
 
         }catch(error){
           throw error;
@@ -29,7 +29,7 @@ import validation from '../requests/requestArticle.js';
 
         const articleId = parseInt(id, 10);
         const article = await articleModel.getArticleById(articleId);
-        res.render('article/show', { article });
+        res.render('article/show', { article, req });
 
         }catch(error){
           throw error;
@@ -44,7 +44,8 @@ import validation from '../requests/requestArticle.js';
         if(check.error){
 
           return res.status(400).render("article/addArticle", {
-            'error': "please fill all the inputs"
+            'error': "please fill all the inputs",
+            req
           })
 
         }
@@ -99,7 +100,7 @@ import validation from '../requests/requestArticle.js';
 
         const articleId = parseInt(id, 10);
         const article = await articleModel.getArticleById(articleId);
-        res.render('article/editeArticle', { article });
+        res.render('article/editeArticle', { article, req });
 
         }catch(error){
           throw error;
@@ -114,7 +115,8 @@ import validation from '../requests/requestArticle.js';
         if(check.error){
 
           return res.status(400).render("article/editeArticle", {
-            'error': "please fill all the inputs"
+            'error': "please fill all the inputs",
+            req
           })
 
         }
@@ -144,9 +146,10 @@ import validation from '../requests/requestArticle.js';
 
     async dashboard(req , res ){
       const articleModel = new Article();
-      const articles = await articleModel.getAuthArticles(req)
+      const articles = await articleModel.getAuthArticles(req, res)
       return res.render("article/dashboard",{
         articles,
+        req
       })
     }
     
