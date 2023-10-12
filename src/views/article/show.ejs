@@ -10,7 +10,7 @@
 
             <p class="mt-5 text-base text-gray-500 sm:text-lg dark:text-gray-400"><%= article.content %></p>
             <p><%= article.author.fullName %></p>
-            <% if(article.authorId == 1 ){ %>
+            <% if(article.authorId ==  req.cookies.user_id ){ %>
                 <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
                     <button type="submit" class="inline-flex bg-red-500 items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete article</button>
 
