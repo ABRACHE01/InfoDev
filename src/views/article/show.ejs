@@ -75,7 +75,7 @@
                                     </svg>
                                 </button>
                                 <div id="dropdownComment4"
-                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" style="display: none;">
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdownMenuIconHorizontalButton">
                                         <li>
@@ -133,13 +133,20 @@
                 const button = document.getElementById('dropdownComment4Button');
                 const dropdown = document.getElementById('dropdownComment4');
 
-                button.addEventListener('click', () => {
-                    dropdown.classList.toggle('hidden');
+                button.addEventListener('click', (event) => {
                     button.style.display = "none";
+                    dropdown.style.display = "block";
+                    // dropdown.classList.toggle('hidden');
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (event.target !== button && !dropdown.contains(event.target)) {
+                        dropdown.style.display = "none";
+                        button.style.display = "block";
+                    }
                 });
 
                 const displayFormUpdate = (commentId) => {
-                    console.log("hhh");
                     const updateForm = document.getElementById(`update-form-${commentId}`);
                     updateForm.style.display = "block";
                     const commentContent = document.getElementById(`comment-${commentId}`);
