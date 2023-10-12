@@ -21,12 +21,10 @@ import validation from '../requests/requestArticle.js';
     }
     
     async show(req, res) {
-
-        const articleModel = new Article();
-        const { id } = req.params; 
-
-        try {
-
+      const articleModel = new Article();
+      const { id } = req.params;
+    
+      try {
         const articleId = parseInt(id, 10);
         const article = await articleModel.getArticleById(articleId);
         res.render('article/show', { article, req });
@@ -35,7 +33,8 @@ import validation from '../requests/requestArticle.js';
           throw error;
         }
 
-      }
+    }
+    
 
       async submitAdd(req, res) {
 
