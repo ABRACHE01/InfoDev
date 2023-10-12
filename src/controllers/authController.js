@@ -8,7 +8,7 @@ export class AuthController{
         const validate = validation.validateRegister(req);
         
         if(validate.error){
-            return res.status(400).render("auth/register", {
+            return res.status(400).render("auth/signup", {
                 'error': "double check on your inputs!",
                 req
             })
