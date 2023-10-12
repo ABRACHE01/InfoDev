@@ -5,18 +5,18 @@ class CommentController {
 
   async createComment(req, res) {
     const { content, publishDate, authorId, articleId } = req.body;
-
+  
     const authorIdAsInt = parseInt(authorId, 10);
     const articleIdAsInt = parseInt(articleId, 10);
-
+  
     if (!content || !authorId || !articleId) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
-
+  
     try {
       const comment = await Comment.create({
         content,
-        publishDate,
+        publishDate: new Date(publishDate), 
         author: { connect: { id: authorIdAsInt } },
         article: { connect: { id: articleIdAsInt } },
       });
@@ -34,9 +34,10 @@ class CommentController {
         select: {
           id: true,
           content: true,
+          createdAt: true,
           author: {
             select: {
-              fullName: true, // Include the author's full name
+              fullName: true, 
             },
           },
         },
@@ -51,20 +52,21 @@ class CommentController {
   }
 
   async deleteComment(req, res) {
-    const commentId = parseInt(req.params.commentId, 10); // Parse commentId as an integer
+    const commentId = parseInt(req.params.commentId, 10);
 
-  try {
-    await Comment.deleteComment(commentId);
-    console.log(`Deleted comment with ID ${commentId}`);
-    res.redirect('/articles');
-  } catch (error) {
-    console.error('Error deleting comment:', error);
-    res.status(500).send('Internal Server Error');
-  }
-  }
+    try {
+        await Comment.deleteComment(commentId);
+        console.log(`Deleted comment with ID ${commentId}`);
+        res.redirect("/articles");
+    } catch (error) {
+        console.error('Error deleting comment:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 
   async updateComent(req, res) {
     const commentId = parseInt(req.params.commentId, 10);
+    
     // const commentIdAsInt = parseInt(commentId, 10);
     const {content} = req.body;
 

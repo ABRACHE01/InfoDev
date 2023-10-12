@@ -2,11 +2,15 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const Comment = {
-    create: async (data) => {
-        return prisma.comment.create({
-           data ,
-        })
-    },
+  create: async (data) => {
+    return prisma.comment.create({
+      data: {
+        ...data,
+        publishDate: new Date(), 
+      },
+    });
+  },
+
 
     findMany: async () => {
       return prisma.comment.findMany();
