@@ -10,8 +10,13 @@ const articleController = new ArticleController();
 router.get('/articles', articleController.index);
 router.get('/dashboard', articleController.dashboard);
 router.get('/articles/:id', articleController.show);
+
 router.get('/article/add', (req, res) => {
   res.render('article/addArticle');
+});
+
+router.get('/', (req, res) => {
+  res.render('landing');
 });
 
 router.get('/article/edite/:id', articleController.showBeforeUpdate);
