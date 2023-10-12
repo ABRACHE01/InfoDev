@@ -47,7 +47,7 @@ export default class Article {
       }
     }
 
-   async getAuthArticles(){
+   async getAuthArticles(req, res){
     
     try {
 
@@ -63,8 +63,7 @@ export default class Article {
           author : true,  
         },
         where:{
-          // authorId : parseInt(req.cookies.user_id)
-          authorId : 1
+          authorId : parseInt(req.cookies.user_id)
         }
 
       })

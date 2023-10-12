@@ -57,7 +57,7 @@ class CommentController {
     try {
         await Comment.deleteComment(commentId);
         console.log(`Deleted comment with ID ${commentId}`);
-        res.redirect("/articles");
+        res.redirect(`/articles`);
     } catch (error) {
         console.error('Error deleting comment:', error);
         res.status(500).send('Internal Server Error');

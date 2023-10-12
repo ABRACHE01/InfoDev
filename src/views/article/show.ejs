@@ -10,7 +10,7 @@
 
             <p class="mt-5 text-base text-gray-500 sm:text-lg dark:text-gray-400"><%= article.content %></p>
             <p><%= article.author.fullName %></p>
-            <% if(article.authorId == 1 ){ %>
+            <% if(article.authorId ==  req.cookies.user_id ){ %>
                 <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
                     <button type="submit" class="inline-flex bg-red-500 items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete article</button>
 
@@ -32,7 +32,7 @@
                         placeholder="Write a comment..." required></textarea>
                 </div>
                 <div>
-                    <input type="hidden" id="authorId" name="authorId" value="1" required>
+                    <input type="hidden" id="authorId" name="authorId" value="<%=  req.cookies.user_id %>" required>
                 </div>
                 <div>
                     <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>" required>
@@ -50,39 +50,44 @@
                 <% article.comments.forEach((comment) => {%>
                    
                     <div class="my-7">
-                        <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4"
+                    <% if(comment.authorId ==  req.cookies.user_id ){ %>
+                    <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4"
                         class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         type="button">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                             <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                         </svg>
                     </button>
-    
-                    <!-- Dropdown menu -->
                     <div id="dropdownComment4"
-                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownMenuIconHorizontalButton">
-                            <li>
-                                
-                                <button onclick="displayFormUpdate('<%= comment.id %>')" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
-                            </li>
-                            <li>
-                                <form
-                                        method="POST"
-                                        action="/delete-comment/<%= comment.id %>?_method=DELETE"
-                                        onsubmit="console.log('Form submitted');"
-                                    >
-                                    <div>
-                                        <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>" required>
-                                    </div>
-                                    <button type="submit" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
-                                    </form>
-                            </li>
-                            <li>
-                            </li>
-                        </ul>
-                    </div>
+                    class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownMenuIconHorizontalButton">
+                        <li>
+                            
+                            <button onclick="displayFormUpdate('<%= comment.id %>')" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
+                        </li>
+                        <li>
+                            <form
+                                    method="POST"
+                                    action="/delete-comment/<%= comment.id %>?_method=DELETE"
+                                    onsubmit="console.log('Form submitted');"
+                                >
+                                <div>
+                                    <input type="hidden" id="articleId" name="articleId" value="<%= article.id %>" required>
+                                </div>
+                                <button type="submit" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
+                                </form>
+                        </li>
+                        <li>
+                        </li>
+                    </ul>
+                </div>
+                    <% }else { %>
+                        <!-- Debug information -->
+                        <p>Condition is false</p>
+                    <% } %>
+                    <!-- Dropdown menu -->
+                   
                         <div>
                             <% if (comment.author) { %>
                                 <p><%= comment.author.fullName %></p>

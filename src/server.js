@@ -21,10 +21,13 @@ app.put('/update-comment/:commentId', CommentController.updateComent);
 
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { router } from './routes/articleRouts.js';
+import { router } from './routes/Routes.js';
 import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
 import layouteEjs from "express-ejs-layouts";
 
+
+app.use(cookieParser());
 
 app.use(methodOverride('_method'));
 const __filename = fileURLToPath(import.meta.url);
