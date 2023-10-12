@@ -6,7 +6,6 @@ import validation from '../requests/requestArticle.js';
 
  class ArticleController {
 
-
     async index(req , res ){
 
         const articleModel = new Article();
@@ -89,7 +88,7 @@ import validation from '../requests/requestArticle.js';
           // Delete the article record from the database
           await articleModel.deleteArticle(parseInt(id, 10));
     
-          res.redirect('/articles');
+          res.redirect('/dashboard');
         } catch (error) {
           throw error;
         }

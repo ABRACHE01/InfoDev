@@ -5,8 +5,8 @@ import upload from "../help.js"
 const router = express.Router();
 const articleController = new ArticleController();
 
-//routes here 
 
+//routes here 
 router.get('/articles', articleController.index);
 router.get('/dashboard', articleController.dashboard);
 router.get('/articles/:id', articleController.show);
