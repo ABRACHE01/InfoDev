@@ -1,25 +1,88 @@
 
 <% if(article){ %> 
+<div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-20">
+    <div class="grid justify-center  ">
+        <div class="w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white"><%= article.title %></h5>
+            <div class="items-center mt-5  justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+                <img src="../uploads/<%= article.photo %>"  width="50%" height="50%" class="rounded-lg" alt="">
+            </div>
 
-<h1><%= article.title %></h1>
-<img src="../uploads/<%= article.photo %>" width="100px" height="100px" alt="">
-<p>
-    <%= article.content %>
-</p>
-<p>
-    <%= article.publishDate %>
-</p>
-<p>
-    <%= article.author.fullName %>
-</p> 
+            <p class="mt-5 text-base text-gray-500 sm:text-lg dark:text-gray-400"><%= article.content %></p>
+            <p><%= article.author.fullName %></p>
+            <% if(article.authorId == 1 ){ %>
+                <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
+                    <button type="submit" class="inline-flex bg-red-500 items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Delete article</button>
 
-<% if(article.authorId == 1 ){ %>
-    <form method="POST" action="/article/<%= article.id %>?_method=DELETE" style="display: inline;">
-        <button type="submit">Delete</button>
-        <a href="/article/edite/<%= article.id %>">edite</a>
-    </form>
-<% } %> 
+                    <a  class="inline-flex bg-green-500 items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+                        href="/article/edite/<%= article.id %>">edite article</a>
+                </form>
+            <% } %> 
+        </div>
+        <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+            <div class="max-w-2xl mx-auto px-4">
+                <div class="flex justify-between items-center mb-6">
+                  <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion</h2>
+              </div>
+              <form class="mb-6">
+                  <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                      <label for="comment" class="sr-only">Your comment</label>
+                      <textarea id="comment" rows="6"
+                          class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                          placeholder="Write a comment..." required></textarea>
+                  </div>
+                  <button type="submit"
+                      class="inline-flex bg-blue-800 items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                      Post comment
+                  </button>
+              </form>
+              <article class="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                <footer class="flex justify-between items-center mb-2">
+                    <div class="flex items-center">
+                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                                class="mr-2 w-6 h-6 rounded-full"
+                                src="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
+                                alt="Helene Engels">Helene Engels</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-06-23"
+                                title="June 23rd, 2022">Jun. 23, 2022</time></p>
+                    </div>
+                    <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4"
+                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        type="button">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                        </svg>
+                    </button>
 
-<% }else{ %>
-    <h1>article not found</h1>
-<% } %> 
+                    <!-- Dropdown menu -->
+                    <div id="dropdownComment4"
+                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                            aria-labelledby="dropdownMenuIconHorizontalButton">
+                            <li>
+                                <a href="#"
+                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                            </li>
+                        </ul>
+                    </div>
+                </footer>
+                <p class="text-gray-500 dark:text-gray-400">Thanks for sharing this. I do came from the Backend development and explored some of the tools to design my Side Projects.</p>
+            
+            </article> 
+            </div>
+          </section>
+    </div>
+</div>
+
+    <% }else{ %>
+        <h1>article not found</h1>
+    <% } %> 
+    
