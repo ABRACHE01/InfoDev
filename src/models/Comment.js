@@ -34,7 +34,7 @@ const Comment = {
       } catch (error) {
         throw new Error('Error updating comment');
       }
-    }
+    },
 }
 
 export default Comment;

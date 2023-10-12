@@ -21,6 +21,7 @@ class CommentController {
         article: { connect: { id: articleIdAsInt } },
       });
       res.redirect(`/articles/${articleId}`);
+      
     } catch (error) {
       console.error('Error creating comment:', error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -29,7 +30,19 @@ class CommentController {
 
   async getComments(req, res) {
     try {
-      const comments = await Comment.findMany();
+      const comments = await Comment.findMany({
+        select: {
+          id: true,
+          content: true,
+          author: {
+            select: {
+              fullName: true, // Include the author's full name
+            },
+          },
+        },
+      });
+      console.log(comments);
+  
       res.json(comments);
     } catch (error) {
       console.log('Error retrieving comments:', error);
@@ -70,6 +83,20 @@ class CommentController {
       console.error('Error updating comment:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
+  }
+
+  async commentsWithAuthorNames (commentId, data) {
+    return Comment.findMany({
+      select: {
+        id: true,
+        content: true,
+        author: {
+          select: {
+            fullName: true, // Include the author's full name
+          },
+        },
+      },
+    });
   }
 }
 

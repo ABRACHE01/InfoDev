@@ -25,21 +25,27 @@ export default class Article {
       }
     }
 
-   async getArticleById(id){
-    try{
-    return await prisma.article.findUnique({
-      where : {id}, 
-      include : {
-        author : true,
-        comments: { // Include comments related to this article
-              
-        },
+    async getArticleById(id) {
+      try {
+        return await prisma.article.findUnique({
+          where: { id },
+          include: {
+            author: true,
+            comments: {
+              include: {
+                author: {
+                  select: {
+                    fullName: true, // Include the author's full name
+                  },
+                },
+              },
+            },
+          },
+        });
+      } catch (error) {
+        throw error;
       }
-    })
-  }catch(error){
-    throw error;
-  }
-   }
+    }
 
    async getAuthArticles(){
     
