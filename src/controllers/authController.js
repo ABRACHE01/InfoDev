@@ -20,9 +20,13 @@ export class AuthController{
         const photo = req.file ? req.file.filename : null;
 
         const author = new AuthModel(fullName, photo, email, hashedPassword);
-        await author.register();
         
-        res.send(author);
+        if(await author.register()){
+            res.render("auth/login", {
+                'error': "",
+                req
+            })
+        }
     }
 
     static async login(req, res){
@@ -30,7 +34,8 @@ export class AuthController{
         
         if(validate.error){
             return res.status(400).render("auth/login", {
-                'error': "double check on your inputs!"
+                'error': "double check on your inputs!",
+                req
             })
         }
 
@@ -43,19 +48,26 @@ export class AuthController{
                 res.cookie('user_id', author.id);
                 res.redirect('/home'); // change it to /dashboard
             }else{
-                res.send("Incorrect password");
-                res.redirect('/login');
+                res.status(400).render("auth/login", {
+                    'error': "Incorrect password",
+                    req
+                })
             }
         }else{
-            res.send("Email not found");
-            res.redirect('/login');
+            res.status(400).render("auth/login", {
+                'error': "Email not found",
+                req
+            })
         }
     }
 
     static async logout(req, res){
         if(req.cookies.user_id){
             res.clearCookie('user_id')
-            res.render('auth/login');
+            res.render('auth/login', {
+                'error' : '',
+                req
+            });
         }
     }
 }

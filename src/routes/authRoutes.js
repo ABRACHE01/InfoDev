@@ -31,13 +31,15 @@ router.get('/logout', async(req, res) => {
 
 router.get("/login", authMiddlewares.preventBackToLoginOrSignup ,(req, res) => {
     res.render('auth/login', {
-        'error': ""
+        'error': "",
+        req
     })
 })
 
 router.get("/register",authMiddlewares.preventBackToLoginOrSignup, (req, res) => {
     res.render('auth/signup', {
-        'error': ""
+        'error': "",
+        req
     })
 })
 
