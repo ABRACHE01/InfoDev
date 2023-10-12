@@ -3,10 +3,24 @@ import { ArticleController } from '../controllers/articleController.js';
 import upload from "../help.js"
 import { authMiddlewares } from '../middleware/authentification.js';
 import { AuthController } from '../controllers/authController.js';
+import    { UserController }   from '../controllers/userController.js';
+
 
 
 const router = express.Router();
 const articleController = new ArticleController();
+const userController = new UserController();
+
+
+//Profile routes 
+
+router.get('/user/:id', authMiddlewares.checkIfLoggedIn , userController.show);
+
+router.get('/user/edit/:id', authMiddlewares.checkIfLoggedIn , userController.showBeforeUpdate);
+
+router.put('/updateUser/:id' ,authMiddlewares.checkIfLoggedIn, upload.single('photo'), userController.updateUser);
+
+router.delete('/deleteUser/:id' ,authMiddlewares.checkIfLoggedIn,userController.deleteUser);
 
 
 //routes here 
@@ -77,5 +91,8 @@ router.get("/register",authMiddlewares.preventBackToLoginOrSignup, (req, res) =>
 // router.get("/home", authMiddlewares.checkIfLoggedIn, (req, res)=>{
 //   res.render('home')
 // })
+
+
+
 
 export { router };
