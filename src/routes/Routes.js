@@ -4,14 +4,14 @@ import upload from "../help.js"
 import { authMiddlewares } from '../middleware/authentification.js';
 import { AuthController } from '../controllers/authController.js';
 import    { UserController }   from '../controllers/userController.js';
-import CommentController from '../controllers/CommentController.js';
+import {CommentController} from '../controllers/commentController.js'
 
 
 
 const router = express.Router();
 const articleController = new ArticleController();
 const userController = new UserController();
-
+const commentController = new CommentController();
 
 //Profile routes 
 
@@ -91,10 +91,10 @@ router.get("/register",authMiddlewares.preventBackToLoginOrSignup, (req, res) =>
 
 
 // routes
-router.post('/create-comment', CommentController.createComment);
-router.get('/get-comments', CommentController.getComments);
-router.delete('/delete-comment/:commentId', CommentController.deleteComment); 
-router.put('/update-comment/:commentId', CommentController.updateComent);
+router.post('/create-comment', commentController.createComment);
+router.get('/get-comments', commentController.getComments);
+router.delete('/delete-comment/:commentId', commentController.deleteComment); 
+router.put('/update-comment/:commentId', commentController.updateComent);
 
 
 

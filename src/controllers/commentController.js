@@ -102,4 +102,4 @@ class CommentController {
   }
 }
 
-export default new CommentController();
+export {CommentController}
