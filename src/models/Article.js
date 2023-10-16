@@ -10,8 +10,11 @@ export default class Article {
     async getAllArticles(){
       try{
         return await prisma.article.findMany({
-          include : {
-            author : true,
+          include: {
+            author: true,
+            comments: { // Include comments related to this article
+              
+            },
           },
           orderBy: {
             publishDate: 'desc', 
@@ -22,20 +25,29 @@ export default class Article {
       }
     }
 
-   async getArticleById(id){
-    try{
-    return await prisma.article.findUnique({
-      where : {id}, 
-      include : {
-        author : true,
+    async getArticleById(id) {
+      try {
+        return await prisma.article.findUnique({
+          where: { id },
+          include: {
+            author: true,
+            comments: {
+              include: {
+                author: {
+                  select: {
+                    fullName: true, // Include the author's full name
+                  },
+                },
+              },
+            },
+          },
+        });
+      } catch (error) {
+        throw error;
       }
-    })
-  }catch(error){
-    throw error;
-  }
-   }
+    }
 
-   async getAuthArticles(){
+   async getAuthArticles(req, res){
     
     try {
 
@@ -51,8 +63,7 @@ export default class Article {
           author : true,  
         },
         where:{
-          // authorId : parseInt(req.cookies.user_id)
-          authorId : 1
+          authorId : parseInt(req.cookies.user_id)
         }
 
       })

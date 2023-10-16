@@ -13,7 +13,7 @@ import validation from '../requests/requestArticle.js';
         try {
 
         const articles = await articleModel.getAllArticles();
-        res.render('article/index' , {articles}) 
+        res.render('article/index' , {articles, req}) 
 
         }catch(error){
           throw error;
@@ -21,21 +21,20 @@ import validation from '../requests/requestArticle.js';
     }
     
     async show(req, res) {
-
-        const articleModel = new Article();
-        const { id } = req.params; 
-
-        try {
-
+      const articleModel = new Article();
+      const { id } = req.params;
+    
+      try {
         const articleId = parseInt(id, 10);
         const article = await articleModel.getArticleById(articleId);
-        res.render('article/show', { article });
+        res.render('article/show', { article, req });
 
         }catch(error){
           throw error;
         }
 
-      }
+    }
+    
 
       async submitAdd(req, res) {
 
@@ -44,7 +43,8 @@ import validation from '../requests/requestArticle.js';
         if(check.error){
 
           return res.status(400).render("article/addArticle", {
-            'error': "please fill all the inputs"
+            'error': "please fill all the inputs",
+            req
           })
 
         }
@@ -69,23 +69,19 @@ import validation from '../requests/requestArticle.js';
         const articleModel = new Article();
     
         try {
-          // Get the root directory of your project
           const rootDir = process.cwd();
     
-          // Retrieve the article by ID to get the associated photo filename
           const article = await articleModel.getArticleById(parseInt(id, 10));
     
           if (!article) {
             return res.status(404).json({ message: 'Article not found' });
           }
     
-          // Delete the associated image file using the filename from the article
           if (article.photo) {
             const imagePath = path.join(rootDir, 'public/uploads', article.photo);
             await fs.unlink(imagePath);
           }
     
-          // Delete the article record from the database
           await articleModel.deleteArticle(parseInt(id, 10));
     
           res.redirect('/dashboard');
@@ -103,7 +99,7 @@ import validation from '../requests/requestArticle.js';
 
         const articleId = parseInt(id, 10);
         const article = await articleModel.getArticleById(articleId);
-        res.render('article/editeArticle', { article });
+        res.render('article/editeArticle', { article, req });
 
         }catch(error){
           throw error;
@@ -118,7 +114,8 @@ import validation from '../requests/requestArticle.js';
         if(check.error){
 
           return res.status(400).render("article/editeArticle", {
-            'error': "please fill all the inputs"
+            'error': "please fill all the inputs",
+            req
           })
 
         }
@@ -129,7 +126,7 @@ import validation from '../requests/requestArticle.js';
         const articleId = parseInt(id, 10);
     
         try {
-            const photo = req.file ? req.file.filename : null;
+            const photo = req.file && req.file.filename ;
     
     
             const updatedData = {
@@ -148,9 +145,10 @@ import validation from '../requests/requestArticle.js';
 
     async dashboard(req , res ){
       const articleModel = new Article();
-      const articles = await articleModel.getAuthArticles(req)
+      const articles = await articleModel.getAuthArticles(req, res)
       return res.render("article/dashboard",{
         articles,
+        req
       })
     }
     
